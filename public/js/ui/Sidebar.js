@@ -42,15 +42,20 @@ class Sidebar {
    * выходу устанавливает App.setState( 'init' )
    * */
   static initAuthLinks() {
-    const registerBtn = document.querySelector('.menu-item_register');
-  if (registerBtn) {
-    registerBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const registerModal = App.getModal('register');
-      if (registerModal) {
-        registerModal.open();
-      }
-    });
-  }
+    const btns = Array.from(document.querySelectorAll('.menu-item'));
+    
+    btns.forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (el.classList.contains('menu-item_register')) {
+          App.getModal('register').open();
+        }else if (el.classList.contains('menu-item_login')) {
+          App.getModal('login').open();
+        }else {
+          User.logout();
+          App.setState('init');
+        }
+      })
+    })
   }
 }

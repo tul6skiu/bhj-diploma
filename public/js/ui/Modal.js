@@ -26,12 +26,14 @@ class Modal {
    * (с помощью метода Modal.onClose)
    * */
   registerEvents() {
-    const closeBtn = this.element.querySelector('[data-dismiss="modal"]')
-    closeBtn.addEventListener('click', (event) => {
-      event.preventDefault();
-      this.onClose()
-    }) 
-    
+    const closeBtn = Array.from(this.element.querySelectorAll('[data-dismiss="modal"]'));
+    closeBtn.forEach(el => {
+      el.addEventListener('click', (event) => {
+        event.preventDefault();
+        this.onClose()
+      }); 
+    })
+
   }
 
   /**
