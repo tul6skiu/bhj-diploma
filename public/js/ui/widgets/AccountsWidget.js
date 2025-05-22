@@ -4,6 +4,7 @@
  * */
 
 class AccountsWidget {
+  
   /**
    * Устанавливает текущий элемент в свойство element
    * Регистрирует обработчики событий с помощью
@@ -14,7 +15,12 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
+    if (!element) {
+      throw new Error('Элемент счета не передан');
+    }
 
+    this.element = element;
+    this.registerEvents();
   }
 
   /**
@@ -25,7 +31,21 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-
+    const createAccountBtn = this.element.querySelector('.create-account');
+  
+    if (createAccountBtn) {
+      createAccountBtn.addEventListener('click', (event) => {
+        event.preventDefault(); // не обязательно, но на всякий случай
+        const modal = App.getModal('createAccount');
+        if (modal) {
+          modal.open();
+        } else {
+          console.error('Модальное окно не найдено!');
+        }
+      });
+    } else {
+      console.warn('.create-account не найден в', this.element);
+    }
   }
 
   /**
