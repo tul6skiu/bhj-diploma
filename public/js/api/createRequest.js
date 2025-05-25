@@ -14,18 +14,16 @@ const createRequest = (options = {}) => {
     let body = null;
   
     if (method === 'GET') {
-    
-      const params = new URLSearchParams(data).toString();
-      if (params) {
-        url += (url.includes('?') ? '&' : '?') + params;
+        const params = new URLSearchParams(data).toString();
+        if (params) {
+          url += (url.includes('?') ? '&' : '?') + params;
+        }
+      } else {
+        body = new FormData();
+        Object.entries(data).forEach(([key, value]) => {
+          body.append(key, value);
+        });
       }
-    } else {
-      
-      body = new FormData();
-      Object.entries(data).forEach(([key, value]) => {
-      body.append(key, value);
-  });
-    }
     console.log(body);
     xhr.open(method, url);
     xhr.responseType = responseType;

@@ -33,7 +33,11 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-
+    const removeAccountBtn = document.querySelector('.remove-account');
+    removeAccountBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        this.removeAccount()
+    })
   }
 
   /**
@@ -46,7 +50,22 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
+   if ( confirm("Вы действительно хотите удалить счёт?")) {
 
+    const activeAccount = document.querySelector('.account.active');
+    const accountId = activeAccount.dataset.id;
+    const accountData = {id: accountId}
+    Account.remove(accountData, (error, response) => {
+      if (response && response.success) {
+        App.updateWidgets();
+        App.updateForms();
+      }else {
+        console.error("Не удалось удалить аккаунт ошибка: " + (response?.error));
+      }
+    });
+
+   }
+   
   }
 
   /**

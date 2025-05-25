@@ -35,6 +35,14 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static remove(data, callback ) {
-
+    createRequest({
+      url: this.URL + '/',
+      method: 'DELETE',
+      responseType: 'json',
+      data: data,
+      callback: (err, response) => {
+        callback(err, response);
+      }
+    });
   }
 }

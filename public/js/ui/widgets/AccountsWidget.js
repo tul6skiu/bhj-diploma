@@ -45,7 +45,7 @@ class AccountsWidget {
         return;
       }
   
-      // Клик по счету
+    
       const accountEl = event.target.closest('.account');
       if (accountEl) {
         this.onSelectAccount(accountEl);

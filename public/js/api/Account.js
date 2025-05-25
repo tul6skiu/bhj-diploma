@@ -9,7 +9,13 @@ class Account extends Entity {
    * Получает информацию о счёте
    * */
   static get(){
-
+    createRequest({
+      url: this.URL + '/{id}',
+      method: 'GET',
+      responseType: 'json',
+      data,
+      callback
+    });
   }
 
   static create(data, callback) {
@@ -26,6 +32,18 @@ class Account extends Entity {
     createRequest({
       url: this.URL, 
       method: 'GET',
+      responseType: 'json',
+      data: data,
+      callback: (err, response) => {
+        callback(err, response);
+      }
+    });
+  }
+
+  static remove(data, callback ) {
+    createRequest({
+      url: this.URL + '/',
+      method: 'DELETE',
       responseType: 'json',
       data: data,
       callback: (err, response) => {
