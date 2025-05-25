@@ -12,7 +12,9 @@ class UserWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor(element){
-
+    if (!element) {
+      throw new Error('Элемент счета не передан');
+    }
   }
 
   /**
@@ -23,6 +25,11 @@ class UserWidget {
    * авторизованного пользователя
    * */
   update(){
-
+    const userData = User.current();
+    if (userData) {
+     const userName = document.querySelector('.user-name');
+     userName.textContent = userData.name;
+    }
+   console.log(userData);
   }
 }

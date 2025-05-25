@@ -29,6 +29,7 @@ const createRequest = (options = {}) => {
     console.log(body);
     xhr.open(method, url);
     xhr.responseType = responseType;
+    xhr.withCredentials = true;
   
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {

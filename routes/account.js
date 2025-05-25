@@ -13,7 +13,9 @@ const FileSync = require('lowdb/adapters/FileSync', {
 router.put("/", upload.none(), function(request, response) {
     //получение названия счёта
     const {name} = request.body;
+    console.log("Имя: " + name);
     const db = low(new FileSync('db.json'));// получение БД
+    console.log("SessionId: " + request.session.id);
     let user = db.get("users").find({id: request.session.id});// поиск авторизованного пользователя
     let userValue = user.value();// получение значения авторизованного пользователя
     if(!userValue){
@@ -51,7 +53,7 @@ router.delete("/", upload.none(), function(request, response) {
 router.get("/:id?", upload.none(), function(request, response) {
     const db = low(new FileSync('db.json'));
     let { id } = request.session; // получение id пользователя из запроса
-
+    console.log("я тут:  " + request)
     let user = db.get("users").find({id});
     let userValue = user.value();
 

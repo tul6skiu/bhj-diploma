@@ -18,7 +18,10 @@ if(!db.get('users').value())
 
 const app = express();
 app.use(express.static(`${__dirname}/${PUBLIC_PATH}`));
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:8000',
+  credentials: true
+}));
 app.use(cookieParser());
 app.use(cookieSession({
   name: 'session',

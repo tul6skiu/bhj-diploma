@@ -8,9 +8,10 @@ class Entity {
    * Это могут быть счета или доходы/расходы
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static list(data, callback){
-
+  static list(data, callback) {
+    
   }
+
 
   /**
    * Создаёт счёт или доход/расход с помощью запроса
@@ -18,7 +19,15 @@ class Entity {
    * что наследуется от Entity)
    * */
   static create(data, callback) {
-
+    createRequest({
+      url: this.URL + '/create',
+      method: 'PUT',
+      responseType: 'json',
+      data: data,
+      callback: (err, response) => {
+        callback(err, response);
+      }
+    });
   }
 
   /**
